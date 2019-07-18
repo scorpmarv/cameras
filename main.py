@@ -47,7 +47,10 @@ def main():
 
         # We use the standardize name to check for duplicates
         if standardized_name not in camera_dict.keys():
-            camera_dict.update({standardized_name: name})
+            camera_dict.update({standardized_name: {name: [camera]}})
+        elif camera not in list(camera_dict[standardized_name].values())[0]:
+            key = list(camera_dict[standardized_name].keys())[0]
+            camera_dict[standardized_name][key].append(camera)
 
     data_sorted = OrderedDict(sorted(camera_dict.items(),  key=lambda x: x[0]))
 
